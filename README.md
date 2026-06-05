@@ -1,10 +1,96 @@
 # 📘 Guia Completo de Git, GitHub e Fluxo Profissional
 
+## Índice
+
+- [Visão geral](#visão-geral)
+- [1. Fundamentos do fluxo de trabalho](#1-fundamentos-do-fluxo-de-trabalho)
+  - [Áreas do Git](#áreas-do-git)
+  - [Comandos essenciais para se orientar](#comandos-essenciais-para-se-orientar)
+- [2. Configuração inicial](#2-configuração-inicial)
+  - [Configurações úteis](#configurações-úteis)
+- [3. Criando ou clonando um repositório](#3-criando-ou-clonando-um-repositório)
+  - [Criando localmente](#criando-localmente)
+  - [Clonando do GitHub](#clonando-do-github)
+  - [Conectando um remoto manualmente](#conectando-um-remoto-manualmente)
+- [4. `.gitignore` e proteção de arquivos sensíveis](#4-gitignore-e-proteção-de-arquivos-sensíveis)
+  - [Regras práticas](#regras-práticas)
+  - [Se um segredo já foi commitado](#se-um-segredo-já-foi-commitado)
+- [5. Primeiro commit e boas mensagens](#5-primeiro-commit-e-boas-mensagens)
+  - [Commit inicial](#commit-inicial)
+  - [Conventional Commits](#conventional-commits)
+  - [Exemplos](#exemplos)
+- [6. Autenticação no GitHub](#6-autenticação-no-github)
+  - [SSH](#ssh)
+  - [PAT](#pat)
+- [7. Branches e estratégia de trabalho](#7-branches-e-estratégia-de-trabalho)
+  - [GitHub Flow](#github-flow)
+  - [Git Flow](#git-flow)
+  - [Quando recomendar cada um](#quando-recomendar-cada-um)
+- [8. Git Flow na prática](#8-git-flow-na-prática)
+  - [Inicialização](#inicialização)
+  - [Criando uma feature](#criando-uma-feature)
+  - [Criando release](#criando-release)
+  - [Criando hotfix](#criando-hotfix)
+- [9. Comandos essenciais do dia a dia](#9-comandos-essenciais-do-dia-a-dia)
+  - [Status, histórico e diferenças](#status-histórico-e-diferenças)
+  - [Branches](#branches)
+  - [Sincronização](#sincronização)
+  - [Tags](#tags)
+- [10. Desfazendo alterações com segurança](#10-desfazendo-alterações-com-segurança)
+  - [Antes do commit](#antes-do-commit)
+  - [Depois do commit](#depois-do-commit)
+  - [Comando perigoso](#comando-perigoso)
+- [11. Stash para mudanças temporárias](#11-stash-para-mudanças-temporárias)
+- [12. Pull Requests profissionais](#12-pull-requests-profissionais)
+  - [Fluxo básico](#fluxo-básico)
+  - [Estrutura recomendada de PR](#estrutura-recomendada-de-pr)
+  - [Boas práticas de PR](#boas-práticas-de-pr)
+  - [Estratégias de merge](#estratégias-de-merge)
+- [13. Como analisar Pull Requests](#13-como-analisar-pull-requests)
+  - [Exemplos de comentários úteis](#exemplos-de-comentários-úteis)
+  - [Quando aprovar ou pedir mudanças](#quando-aprovar-ou-pedir-mudanças)
+- [14. Issues bem escritas](#14-issues-bem-escritas)
+  - [Tipos comuns](#tipos-comuns)
+  - [Estrutura recomendada para bug](#estrutura-recomendada-para-bug)
+  - [Estrutura recomendada para feature](#estrutura-recomendada-para-feature)
+  - [Labels úteis](#labels-úteis)
+- [15. GitHub Projects](#15-github-projects)
+  - [Estrutura simples que funciona bem](#estrutura-simples-que-funciona-bem)
+  - [Boas práticas](#boas-práticas-1)
+  - [Automação útil](#automação-útil)
+- [16. GitHub Actions](#16-github-actions)
+  - [Onde fica](#onde-fica)
+  - [Exemplo de workflow de CI para Node.js](#exemplo-de-workflow-de-ci-para-nodejs)
+  - [Gatilhos mais comuns](#gatilhos-mais-comuns)
+  - [Conceitos principais](#conceitos-principais)
+- [17. CI/CD na prática](#17-cicd-na-prática)
+  - [CI — Integração Contínua](#ci--integração-contínua)
+  - [CD — Entrega ou deploy contínuo](#cd--entrega-ou-deploy-contínuo)
+  - [Boas práticas de CI/CD](#boas-práticas-de-cicd)
+- [18. Segurança no GitHub e nas Actions](#18-segurança-no-github-e-nas-actions)
+  - [Regras essenciais](#regras-essenciais)
+  - [Permissões mínimas em workflow](#permissões-mínimas-em-workflow)
+  - [Riscos comuns](#riscos-comuns)
+  - [Branch protection recomendada](#branch-protection-recomendada)
+  - [Dependabot e varredura](#dependabot-e-varredura)
+- [19. Forks e contribuições externas](#19-forks-e-contribuições-externas)
+- [20. GitHub Agents e automação assistida por IA](#20-github-agents-e-automação-assistida-por-ia)
+  - [Usos úteis](#usos-úteis)
+  - [Limites importantes](#limites-importantes)
+  - [Regra prática](#regra-prática)
+- [21. Organização de um repositório profissional](#21-organização-de-um-repositório-profissional)
+  - [Arquivos importantes](#arquivos-importantes)
+- [22. Checklist antes de push, PR e merge](#22-checklist-antes-de-push-pr-e-merge)
+  - [Antes do push](#antes-do-push)
+  - [Antes de abrir PR](#antes-de-abrir-pr)
+  - [Antes do merge](#antes-do-merge)
+- [23. Comandos que valem decorar](#23-comandos-que-valem-decorar)
+- [24. Glossário rápido](#24-glossário-rápido)
+- [25. Recomendação prática final](#25-recomendação-prática-final)
+
 ## Visão geral
 
 Este guia foi reorganizado para servir como referência prática de trabalho profissional com **Git e GitHub**, cobrindo desde a configuração inicial até colaboração, segurança, CI/CD, GitHub Projects, Issues, Pull Requests, GitHub Actions e GitHub Agents. O foco é o caminho mais seguro, limpo e comum no mercado.
-
----
 
 ## 1. Fundamentos do fluxo de trabalho
 
@@ -32,8 +118,6 @@ git diff
 git diff --staged
 ```
 
----
-
 ## 2. Configuração inicial
 
 Configure sua identidade uma vez por máquina:
@@ -49,19 +133,17 @@ git config --list
 ### Configurações úteis
 
 ```bash
-# Rebase em vez de merge automático no pull
+# Pull com rebase
 git config --global pull.rebase true
 
-# Remove branches remotas já apagadas
+# Remove branches remotas apagadas
 git config --global fetch.prune true
 
-# Reaproveita resolução de conflitos semelhantes
+# Reaproveita resolução de conflitos
 git config --global rerere.enabled true
 ```
 
 Essas opções ajudam a manter o histórico mais limpo e reduzem trabalho repetido ao sincronizar branches.
-
----
 
 ## 3. Criando ou clonando um repositório
 
@@ -87,8 +169,6 @@ git remote add origin https://github.com/SEU_USUARIO/api-rest-didatica.git
 git remote -v
 git push -u origin main
 ```
-
----
 
 ## 4. `.gitignore` e proteção de arquivos sensíveis
 
@@ -124,8 +204,6 @@ Ação recomendada:
 2. Remova o arquivo do repositório atual.
 3. Reescreva o histórico só se necessário e com alinhamento da equipe.
 4. Force rotação das credenciais expostas.
-
----
 
 ## 5. Primeiro commit e boas mensagens
 
@@ -165,8 +243,6 @@ git commit -m "docs: atualiza guia de instalação"
 git commit -m "ci: adiciona workflow de testes"
 ```
 
----
-
 ## 6. Autenticação no GitHub
 
 O uso de senha no terminal não é o fluxo recomendado. Prefira **SSH** para uso recorrente ou **Personal Access Token (PAT)** quando necessário.
@@ -188,8 +264,6 @@ git remote set-url origin git@github.com:SEU_USUARIO/api-rest-didatica.git
 ### PAT
 
 Use token com o menor escopo possível. Evite criar token com permissões amplas sem necessidade.
-
----
 
 ## 7. Branches e estratégia de trabalho
 
@@ -230,8 +304,6 @@ Branches clássicas:
 
 - Para projetos pessoais, times pequenos e CI/CD contínuo, prefira **GitHub Flow**.
 - Para produtos com ciclos formais de release, homologação e versões controladas, **Git Flow** pode fazer sentido.
-
----
 
 ## 8. Git Flow na prática
 
@@ -276,8 +348,6 @@ git push origin develop
 git push origin --tags
 ```
 
----
-
 ## 9. Comandos essenciais do dia a dia
 
 ### Status, histórico e diferenças
@@ -316,8 +386,6 @@ git tag
 git push origin --tags
 ```
 
----
-
 ## 10. Desfazendo alterações com segurança
 
 ⚠️ Esta é a parte com maior risco de perda de trabalho.
@@ -350,8 +418,6 @@ git reset --hard HEAD~1
 
 Use `reset --hard` só quando tiver certeza absoluta de que pode perder as alterações locais. Em branch compartilhada, prefira `git revert`.
 
----
-
 ## 11. Stash para mudanças temporárias
 
 ```bash
@@ -362,8 +428,6 @@ git stash apply stash@{0}
 ```
 
 Exemplo de uso: surgiu uma correção urgente e o trabalho atual ainda não está pronto para commit.
-
----
 
 ## 12. Pull Requests profissionais
 
@@ -424,8 +488,6 @@ No GitHub:
 
 Na maioria dos times, `Squash and merge` é excelente para PRs pequenos e médios.
 
----
-
 ## 13. Como analisar Pull Requests
 
 Ao revisar um PR, avalie em ordem:
@@ -449,8 +511,6 @@ Ao revisar um PR, avalie em ordem:
 - **Approve:** quando o código atende objetivo, qualidade e segurança.
 - **Request changes:** quando há risco real, bug, falha de segurança, quebra de fluxo ou ausência crítica de testes.
 - **Comment:** quando é melhoria opcional ou dúvida de entendimento.
-
----
 
 ## 14. Issues bem escritas
 
@@ -511,8 +571,6 @@ Restringe acesso a rotas privadas.
 - `security`
 - `priority:high`
 
----
-
 ## 15. GitHub Projects
 
 GitHub Projects ajuda a transformar Issues e PRs em fluxo visual de trabalho.
@@ -537,8 +595,6 @@ GitHub Projects ajuda a transformar Issues e PRs em fluxo visual de trabalho.
 - Issue criada -> entra em `To Do`
 - PR aberto -> vai para `In Review`
 - PR merged -> vai para `Done`
-
----
 
 ## 16. GitHub Actions
 
@@ -605,8 +661,6 @@ jobs:
 - **runner**: máquina que executa o job
 - **action**: componente reutilizável
 
----
-
 ## 17. CI/CD na prática
 
 ### CI — Integração Contínua
@@ -656,8 +710,6 @@ jobs:
 - Nunca grave segredos no YAML.
 - Use ambientes (`environments`) para controlar produção e homologação.
 
----
-
 ## 18. Segurança no GitHub e nas Actions
 
 Segurança não é detalhe; é parte do fluxo profissional.
@@ -703,8 +755,6 @@ Ative recursos como:
 - Secret scanning
 - Code scanning
 
----
-
 ## 19. Forks e contribuições externas
 
 Quando o projeto recebe PRs de forks, a atenção com segurança precisa aumentar.
@@ -720,8 +770,6 @@ Fluxo comum de contribuição:
 ```text
 fork -> clone -> branch -> commit -> push -> pull request para o repositório original
 ```
-
----
 
 ## 20. GitHub Agents e automação assistida por IA
 
@@ -746,8 +794,6 @@ Agents no ecossistema GitHub podem ajudar em revisão, geração de testes, resu
 
 Use agent para ganhar velocidade, mas mantenha aprovação humana para merge, segurança, deploy e mudanças estruturais.
 
----
-
 ## 21. Organização de um repositório profissional
 
 Estrutura comum:
@@ -771,8 +817,6 @@ LICENSE
 - `CONTRIBUTING.md`: como contribuir
 - `CODEOWNERS`: responsáveis por revisão por área
 - `SECURITY.md`: como reportar vulnerabilidades
-
----
 
 ## 22. Checklist antes de push, PR e merge
 
@@ -799,8 +843,6 @@ LICENSE
 - [ ] Sem conflitos pendentes
 - [ ] Estratégia de merge escolhida conscientemente
 
----
-
 ## 23. Comandos que valem decorar
 
 ```bash
@@ -816,8 +858,6 @@ git restore --staged arquivo.txt
 git revert <hash>
 git stash
 ```
-
----
 
 ## 24. Glossário rápido
 
@@ -836,8 +876,6 @@ git stash
 | Secret | Credencial protegida no GitHub |
 | Fork | Cópia do repositório para outra conta |
 
----
-
 ## 25. Recomendação prática final
 
 Se a meta for adotar um fluxo moderno, simples e seguro, a combinação mais equilibrada para a maioria dos projetos é:
@@ -852,4 +890,5 @@ Se a meta for adotar um fluxo moderno, simples e seguro, a combinação mais equ
 
 Esse conjunto já coloca o repositório em um padrão profissional muito bom.
 
-**Dica Pro:** trate `.github/workflows/` e permissões de token com o mesmo cuidado que trata código de produção.
+Dica Pro: trate `.github/workflows/` e permissões de token com o mesmo cuidado que trata código de produção.
+
